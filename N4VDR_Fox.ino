@@ -2,7 +2,7 @@
  * 
  * 2019-06-19
  * 
- * Arduino Nano 168
+ * Arduino Nano ATmega328P
  *    
  * Does 3 things
  *   1)  Sends morse code ID
@@ -100,7 +100,7 @@ int sensorPin = A0;           // Analog In 0
  *  
  */
 
-char beaconString[] = "CQ N4VDR/FOX";                         //   Type the String to Convert to Morse Code Here
+char beaconString[] = "CQ N1LJK/FOX";                         //   Type the String to Convert to Morse Code Here
 char cmdValue1[] = "1 qsl";                                   //   Type the String to Convert to Morse Code Here
 char cmdValue2[] = "2 qsl";                                   //   Type the String to Convert to Morse Code Here
 char cmdValue3[] = "3 qsl";                                   //   Type the String to Convert to Morse Code Here
@@ -154,9 +154,9 @@ bool txEn = false;                                            // TX Enable 1 = o
 bool rxEn = true;                                             // RX Enable 1 = on, 0 = off
 bool novice = true;                                           // false means "Advanced" group, short tx, true means "new" group, longer tx
 bool storage = true;                                          // used for storing values
-int pause = 60000;                                            // value in milliseconds
-int rMin = 60000;                                             // random minimum for time delay
-int rMax = 240000;                                            // random maximum for time delay
+long pause = 60000;                                            // value in milliseconds
+long rMin = 60000;                                             // random minimum for time delay
+long rMax = 240000;                                            // random maximum for time delay
 int wpmCW = 3;                                                // Words Per Minute.  Location in ditLenArray
 long prevMilli = millis();
 int cmd;                                                      // DTMF command input
@@ -171,7 +171,7 @@ void setup() {
   pinMode(PTT, OUTPUT);
   pinMode(advLed, OUTPUT);
   digitalWrite(PTT, HIGH);
-  randomSeed(analogRead(A0));
+  randomSeed(analogRead(A2));
   txEn = true;
   digitalWrite(advLed, !novice);                              // if in Advanced mode, turn on LED
   #ifdef DEBUG_ON
